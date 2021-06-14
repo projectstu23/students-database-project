@@ -232,3 +232,27 @@ void update(const long int id, Linked* pl)
         puts("sorry,student doesn't exist");
     }
 }
+void deleteStudent(const long int id, Linked* pl)
+{
+    Node* pn = pl->top, * pre = NULL;
+    //to find student 
+    while (pn != NULL && pn->data.ID != id) {
+        pre = pn;
+        pn = pn->next;
+    }
+    if (pn)
+    {
+        if (pre) {
+            pre->next = pn->next;
+        }
+        else {
+            pl->top = pn->next;
+        }
+        free(pn);
+        puts("student removed successfully");
+    }
+    else if (pn == NULL) {
+        puts("student doesn't exist");
+    }
+    pl->size--;
+}
