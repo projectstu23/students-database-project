@@ -25,8 +25,11 @@ typedef struct linked {
 }Linked;
 //nagy
 void insert(Student* record, Linked* pl);
+void createLinked(Linked* pl);
 int linkedEmpty(Linked* pl);
 void display(Student* record) ;
+void query(const long int  id, Linked* pl);
+void instructions(void);
 void enterChoice(int* ch);
 int main() {
     //nagy => files
@@ -322,4 +325,27 @@ void deleteStudent(const long int id, Linked* pl)
         puts("student doesn't exist");
     }
     pl->size--;
+}
+void instructions(void) {
+    puts("\n\t\t\t\t*****************************\nenter \'1\' to enter more than one student data\nenter \'2\' to enter student data\nenter \'3\' to delete all data\nenter \'4\' to search about student by ID and delete his/her data \nenter \'5\' to search about student by his ID and display his/her data\nenter \'6\' to display all student data\nenter \'7\' to search about student by his/her ID and update name , department and degree\nenter \'8\' to know how many students you saved\nenter \'9\' to save\nenter \'10\' to change the userName and the password\nenter \'11\' to end the program\n\t\t\t\t*******************************");
+    //puts("\"tip\" this database designed to read automatically from the file in the beginning of the run\n\t\t\t\t*******************************");
+}
+void query(const long int  id, Linked* pl) {
+    Node* pn = pl->top;
+    //to find where is the Node
+    while ((pn != NULL)&&(pn->data.ID != id) )
+    {
+        pn = pn->next;
+    }
+    if (pn != NULL) {
+        printf("student exist\nstudent name: %s\nstudent department: %s\nstudent ID: %ld\nstudent degree in last year: %0.2f\n", pn->data.name, pn->data.department, pn->data.ID,pn->data.degree);
+    }
+    else if (pn == NULL)
+    {
+        puts("student doesn't exist\n");
+    }
+}
+void createLinked(Linked* pl) {
+    pl->top = NULL;
+    pl->size = 0;
 }
