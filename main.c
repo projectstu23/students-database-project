@@ -4,9 +4,6 @@
 #define NAMESIZE 30
 #define DEPARTMENTSIZE 20
 #define MAXPASSWORD 30
-int linkedEmpty(Linked* pl);
-void display(Student* record) ;
- void enterChoice(int* ch);
 typedef struct
 {
     char userName[MAXPASSWORD];
@@ -28,6 +25,9 @@ typedef struct linked {
 }Linked;
 //nagy
 void insert(Student* record, Linked* pl);
+int linkedEmpty(Linked* pl);
+void display(Student* record) ;
+void enterChoice(int* ch);
 int main() {
     //nagy => files
     Student record;
@@ -62,36 +62,7 @@ int main() {
      while(choice !=11){
         puts("\t\t\t\t*******************************");
          switch (choice) {
-         }
-    return 0;
-}
-//order is function of the name
-void insert(Student* record, Linked* pl) {
-    Node* pn = (Node*)malloc(sizeof(Node));
-    pn->next = NULL;
-    pn->data.ID = record->ID;
-    strcpy(pn->data.name, record->name);
-    strcpy(pn->data.department, record->department);
-    pn->data.degree = record->degree;
-    Node* currentPtr = pl->top;
-    Node* previousPtr = NULL;
-    //to insert  node in order
-    while (currentPtr != NULL && strcmp(currentPtr->data.name, record->name) == -1)
-    {
-        previousPtr = currentPtr;
-        currentPtr = currentPtr->next;
-    }
-    if (pl->top == NULL || previousPtr == NULL) {
-        pn->next = pl->top;
-        pl->top = pn;
-    }
-    else {
-        previousPtr->next = pn;
-        pn->next = currentPtr;
-    }
-    pl->size++;
-}
-case 2:
+           case 2:
             //abdelrahman
             printf("enter student ID: ");
             scanf("%ld", &record.ID);
@@ -130,10 +101,41 @@ case 2:
                     fclose(fptr);
             }
             break;
-    int linkedEmpty(Linked* pl)
+         }
+    return 0;
+}
+//order is function of the name
+void insert(Student* record, Linked* pl) {
+    Node* pn = (Node*)malloc(sizeof(Node));
+    pn->next = NULL;
+    pn->data.ID = record->ID;
+    strcpy(pn->data.name, record->name);
+    strcpy(pn->data.department, record->department);
+    pn->data.degree = record->degree;
+    Node* currentPtr = pl->top;
+    Node* previousPtr = NULL;
+    //to insert  node in order
+    while (currentPtr != NULL && strcmp(currentPtr->data.name, record->name) == -1)
+    {
+        previousPtr = currentPtr;
+        currentPtr = currentPtr->next;
+    }
+    if (pl->top == NULL || previousPtr == NULL) {
+        pn->next = pl->top;
+        pl->top = pn;
+    }
+    else {
+        previousPtr->next = pn;
+        pn->next = currentPtr;
+    }
+    pl->size++;
+}
+//afaf
+int linkedEmpty(Linked* pl)
 {
     return pl->top == NULL;
 }
+ //kashsh
 void deleteAll(Linked* pl) {
     Node* pn = pl->top;
     while (pl->top != NULL) {
@@ -143,10 +145,12 @@ void deleteAll(Linked* pl) {
     }
     pl->size = 0;
 }
-    void display(Student* record) {
+ //afaf
+ void display(Student* record) {
         printf("%-15ld%-25s%-25s%-25.2f\n", record->ID, record->name, record->department,record->degree);
 }
-    void enterChoice(int* ch)
+ //afaf
+void enterChoice(int* ch)
 {
     printf("%s", "enter your choice: ");
     scanf("%d", ch);
