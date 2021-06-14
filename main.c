@@ -27,7 +27,17 @@ typedef struct linked {
 void insert(Student* record, Linked* pl);
 void createLinked(Linked* pl);
 int linkedEmpty(Linked* pl);
-void display(Student* record) ;
+void deleteAll(Linked* pl);
+void deleteStudent(const long int id, Linked* pl);
+//hegazy
+void update(const long int id, Linked* pl);
+void display(Student* record);
+//kashsh
+void traverseLinked(Linked* pl, void (*pf)(Student *record));
+//hegazy
+void save(FILE* fPtr, Linked* pl,Login *pUser);
+//nagy
+void readFile(FILE* fptr, Linked* pl,Login *pUser, void (*fp)(Student* record, Linked* pl));
 void query(const long int  id, Linked* pl);
 void instructions(void);
 void enterChoice(int* ch);
@@ -65,6 +75,31 @@ int main() {
      while(choice !=11){
         puts("\t\t\t\t*******************************");
          switch (choice) {
+                 case 1:
+            //nagy
+            printf("enter student ID(to end enter 0): ");
+            scanf("%ld", &record.ID);
+            while (record.ID < 0)
+            {
+                puts("wrong input, ID must be bigger than zero ");
+                printf("enter student ID: ");
+                scanf("%ld", &record.ID);
+            }
+            while (record.ID != 0) {
+                //to clean input buffer
+                while ((getchar()) != '\n');
+                printf("%s", "enter student name: ");
+                gets(record.name);
+                printf("%s", "enter student deprtemnt: ");
+                gets(record.department);
+                printf("enter student last year degree: ");
+                scanf("%f", &record.degree);
+                insert(&record, &student);
+                printf("enter student ID(to end enter 0): ");
+                scanf("%ld", &record.ID);
+                
+            }
+            break;
            case 2:
             //abdelrahman
             printf("enter student ID: ");
@@ -154,6 +189,19 @@ int main() {
          case 8:
             //osama
             printf("you saved %d student successfully\n", student.size);
+            break;
+         case 9:
+            //nagy
+            fptr=fopen("students.dat","wb");
+            if (fptr == NULL) {
+                perror("error");
+            }
+            else
+            {
+                save(fptr, &student,&user);
+                puts("data saved");
+                fclose(fptr);
+            }
             break;
          case 10:
             //hegazy
@@ -348,4 +396,14 @@ void query(const long int  id, Linked* pl) {
 void createLinked(Linked* pl) {
     pl->top = NULL;
     pl->size = 0;
+}
+void readFile(FILE* fptr, Linked* pl,Login *pUser,void (*fp)(Student* record, Linked* pl))
+{
+    Student record = { 0,"","" };
+    fread(pUser, sizeof(Login), 1, fptr);
+    while (!feof(fptr))
+    {
+       if( (fread(&record, sizeof(Student), 1, fptr))==1)
+        (*fp)(&record, pl);
+    }
 }
