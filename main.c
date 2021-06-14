@@ -194,3 +194,41 @@ void save(FILE* fPtr, Linked* pl,Login *pUser)
         pn = pn->next;
     }
 }
+void update(const long int id, Linked* pl)
+{
+    Node* pn = pl->top;
+    Node* previous = NULL;
+    //to find where is the student
+    while (pn != NULL && pn->data.ID != id)
+    {
+        previous = pn;
+        pn = pn->next;
+    }
+    if (pn) {
+        printf("the student data is\nstudent ID: %d\nstudent name: %s\nstudent department: %s\nstudent degree: %0.2f\nenter student new data::", pn->data.ID, pn->data.name, pn->data.department,pn->data.degree);
+        printf("enter student new ID: ");
+        scanf_s("%ld", &pn->data.ID);
+        while ((getchar()) != '\n');//clear input buffer 
+        printf("%s", "student name: ");    
+        gets(pn->data.name);
+        printf("%s", "student department: ");
+        gets(pn->data.department);
+        printf("enter student last year degree: ");
+        scanf_s("%f", &pn->data.degree);
+        puts("data updated successfully");
+        //to remove that node from the linked list,,, to change the position by the new name
+        if (previous) {
+            previous->next = pn->next;
+        }
+        else {
+            pl->top = pn->next;
+        }
+        insert(&pn->data, pl);
+        //to not save one more student
+        pl->size--;
+    }
+    else if (pn == NULL)
+    {
+        puts("sorry,student doesn't exist");
+    }
+}
