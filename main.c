@@ -59,7 +59,36 @@ int main() {
      while(choice !=11){
         puts("\t\t\t\t*******************************");
          switch (choice) {
-                 case 2:
+         }
+    return 0;
+}
+//order is function of the name
+void insert(Student* record, Linked* pl) {
+    Node* pn = (Node*)malloc(sizeof(Node));
+    pn->next = NULL;
+    pn->data.ID = record->ID;
+    strcpy(pn->data.name, record->name);
+    strcpy(pn->data.department, record->department);
+    pn->data.degree = record->degree;
+    Node* currentPtr = pl->top;
+    Node* previousPtr = NULL;
+    //to insert  node in order
+    while (currentPtr != NULL && strcmp(currentPtr->data.name, record->name) == -1)
+    {
+        previousPtr = currentPtr;
+        currentPtr = currentPtr->next;
+    }
+    if (pl->top == NULL || previousPtr == NULL) {
+        pn->next = pl->top;
+        pl->top = pn;
+    }
+    else {
+        previousPtr->next = pn;
+        pn->next = currentPtr;
+    }
+    pl->size++;
+}
+case 2:
             //abdelrahman
             printf("enter student ID: ");
             scanf("%ld", &record.ID);
@@ -98,34 +127,9 @@ int main() {
                     fclose(fptr);
             }
             break;
-         }
-    return 0;
-}
-//order is function of the name
-void insert(Student* record, Linked* pl) {
-    Node* pn = (Node*)malloc(sizeof(Node));
-    pn->next = NULL;
-    pn->data.ID = record->ID;
-    strcpy(pn->data.name, record->name);
-    strcpy(pn->data.department, record->department);
-    pn->data.degree = record->degree;
-    Node* currentPtr = pl->top;
-    Node* previousPtr = NULL;
-    //to insert  node in order
-    while (currentPtr != NULL && strcmp(currentPtr->data.name, record->name) == -1)
-    {
-        previousPtr = currentPtr;
-        currentPtr = currentPtr->next;
-    }
-    if (pl->top == NULL || previousPtr == NULL) {
-        pn->next = pl->top;
-        pl->top = pn;
-    }
-    else {
-        previousPtr->next = pn;
-        pn->next = currentPtr;
-    }
-    pl->size++;
+    int linkedEmpty(Linked* pl)
+{
+    return pl->top == NULL;
 }
 void deleteAll(Linked* pl) {
     Node* pn = pl->top;
