@@ -407,3 +407,12 @@ void readFile(FILE* fptr, Linked* pl,Login *pUser,void (*fp)(Student* record, Li
         (*fp)(&record, pl);
     }
 }
+void  traverseLinked(Linked* pl, void (*pf)(Student* record))
+{
+    Node* pn = pl->top;
+    while (pn != NULL)
+    {
+        (*pf)(&pn->data);
+        pn = pn->next;
+    }
+}
