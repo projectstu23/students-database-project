@@ -407,6 +407,7 @@ void readFile(FILE* fptr, Linked* pl,Login *pUser,void (*fp)(Student* record, Li
         (*fp)(&record, pl);
     }
 }
+//abdelrahman
 void  traverseLinked(Linked* pl, void (*pf)(Student* record))
 {
     Node* pn = pl->top;
