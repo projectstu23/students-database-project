@@ -161,3 +161,12 @@ void enterChoice(int* ch)
         scanf("%d", ch);
     }
 }
+void  traverseLinked(Linked* pl, void (*pf)(Student* record))
+{
+    Node* pn = pl->top;
+    while (pn != NULL)
+    {
+        (*pf)(&pn->data);
+        pn = pn->next;
+    }
+}
