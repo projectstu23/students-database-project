@@ -101,17 +101,6 @@ int main() {
                     fclose(fptr);
             }
             break;
-                 case 5:
-            //afaf
-            if (linkedEmpty(&student)) {
-                puts("database is empty, no students to search");
-            }
-            else {
-                printf("enter student ID to search: ");
-                scanf("%ld", &record.ID);
-                query(record.ID, &student);
-            }
-            break;
          case 4: 
             //osama
             //check that the Linked is not empty
@@ -125,6 +114,18 @@ int main() {
                 deleteStudent(record.ID, &student);               
             }
             break;
+          case 5:
+            //afaf
+            if (linkedEmpty(&student)) {
+                puts("database is empty, no students to search");
+            }
+            else {
+                printf("enter student ID to search: ");
+                scanf("%ld", &record.ID);
+                query(record.ID, &student);
+            }
+            break;
+        
         case 6:
             //afaf
             if (linkedEmpty(&student)) {
