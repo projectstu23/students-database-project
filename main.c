@@ -101,6 +101,27 @@ int main() {
                     fclose(fptr);
             }
             break;
+                 case 5:
+            //afaf
+            if (linkedEmpty(&student)) {
+                puts("database is empty, no students to search");
+            }
+            else {
+                printf("enter student ID to search: ");
+                scanf("%ld", &record.ID);
+                query(record.ID, &student);
+            }
+            break;
+        case 6:
+            //afaf
+            if (linkedEmpty(&student)) {
+                puts("database is empty, no students to display");
+            }
+            else {
+                printf("%-15s%-25s%-25s%-25s\n\n", "ID", "name", "department","degree");
+                traverseLinked(&student, display);
+            }
+            break;
          }
     return 0;
 }
@@ -159,14 +180,5 @@ void enterChoice(int* ch)
         puts("wrong input, choices must be between \'1\' and \'11\'");
         printf("%s", "enter your choice: ");
         scanf("%d", ch);
-    }
-}
-void  traverseLinked(Linked* pl, void (*pf)(Student* record))
-{
-    Node* pn = pl->top;
-    while (pn != NULL)
-    {
-        (*pf)(&pn->data);
-        pn = pn->next;
     }
 }
