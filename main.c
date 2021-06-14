@@ -4,6 +4,9 @@
 #define NAMESIZE 30
 #define DEPARTMENTSIZE 20
 #define MAXPASSWORD 30
+int linkedEmpty(Linked* pl);
+void display(Student* record) ;
+ void enterChoice(int* ch);
 typedef struct
 {
     char userName[MAXPASSWORD];
@@ -140,12 +143,17 @@ void deleteAll(Linked* pl) {
     }
     pl->size = 0;
 }
-void  traverseLinked(Linked* pl, void (*pf)(Student* record))
+    void display(Student* record) {
+        printf("%-15ld%-25s%-25s%-25.2f\n", record->ID, record->name, record->department,record->degree);
+}
+    void enterChoice(int* ch)
 {
-    Node* pn = pl->top;
-    while (pn != NULL)
-    {
-        (*pf)(&pn->data);
-        pn = pn->next;
+    printf("%s", "enter your choice: ");
+    scanf("%d", ch);
+    //to make sure user enter correct input
+    while (*ch < 1 || *ch >11) {
+        puts("wrong input, choices must be between \'1\' and \'11\'");
+        printf("%s", "enter your choice: ");
+        scanf("%d", ch);
     }
 }
