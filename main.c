@@ -140,3 +140,12 @@ void deleteAll(Linked* pl) {
     }
     pl->size = 0;
 }
+void  traverseLinked(Linked* pl, void (*pf)(Student* record))
+{
+    Node* pn = pl->top;
+    while (pn != NULL)
+    {
+        (*pf)(&pn->data);
+        pn = pn->next;
+    }
+}
