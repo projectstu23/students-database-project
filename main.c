@@ -26,7 +26,40 @@ typedef struct linked {
 //nagy
 void insert(Student* record, Linked* pl);
 int main() {
-
+    //nagy => files
+    Student record;
+    Linked student;
+    Login user = { "admin","admin" }, userCheck;
+    int choice;
+    //if the file exist, Linked will read the file else it will do nothing beacuse it's first time
+    FILE* fptr = fopen("students.dat","rb");
+    createLinked(&student);
+    //to read the file data alwaya in the beginning and make it easy to deal with the data
+    if (fptr != NULL) {
+        readFile(fptr, &student,&user, insert);
+        fclose(fptr);
+    }
+    puts("\t\t\t\tWELCOME TO YOUR STUDENTS DATABASE");
+    puts("\ntip,the default userName is \"admin\", default password is \"admin\"\nLOGIN");
+    printf("%s", "username: ");
+    gets(userCheck.userName);
+    printf("%s", "password: ");
+    gets(userCheck.password);
+    //to check for password correctness
+    while ((strcmp(user.userName,userCheck.userName))!=0 || (strcmp(user.password,userCheck.password))!=0 ) {
+        puts("wrong user name or password,please try login again");
+        printf("%s", "username: ");
+        gets(userCheck.userName);
+        printf("%s", "password: ");
+        gets(userCheck.password);
+    }
+    system("clear");
+    instructions();
+    enterChoice(&choice);
+     while(choice !=11){
+        puts("\t\t\t\t*******************************");
+         switch (choice) {
+         }
     return 0;
 }
 //order is function of the name
