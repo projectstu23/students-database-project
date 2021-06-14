@@ -182,3 +182,15 @@ void enterChoice(int* ch)
         scanf("%d", ch);
     }
 }
+    //hegazy
+void save(FILE* fPtr, Linked* pl,Login *pUser)
+{
+    //kept the Linked ,dont destroy the data
+    Node* pn = pl->top;
+    //to save the password in the file
+    fwrite(pUser, sizeof(Login), 1, fPtr);
+    while (pn) {
+        fwrite(&pn->data, sizeof(Student), 1, fPtr);
+        pn = pn->next;
+    }
+}
