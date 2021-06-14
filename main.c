@@ -127,4 +127,12 @@ void insert(Student* record, Linked* pl) {
     }
     pl->size++;
 }
-
+void deleteAll(Linked* pl) {
+    Node* pn = pl->top;
+    while (pl->top != NULL) {
+        pl->top = pl->top->next;
+        free(pn);
+        pn = pl->top;
+    }
+    pl->size = 0;
+}
