@@ -123,6 +123,44 @@ int main() {
             }
             break;
          }
+         case 10:
+            //hegazy
+            while ((getchar()) != '\n');
+            printf("%s", "enter current password: ");
+            gets(userCheck.password);
+            while (  (strcmp(userCheck.password, user.password)) != 0)
+            {
+                puts("wrong password, enter password again");
+                printf("%s", "password: ");
+                gets(userCheck.password);
+            } 
+            printf("%s", "enter new userName: ");
+            gets(user.userName);
+            printf("%s", "enter new password: ");
+            gets(user.password);
+            //to save the new password in the file
+            fptr = fopen("students.dat", "wb");
+            if (fptr == NULL) {
+                puts("can't change the password");
+            }
+            else{
+             save(fptr, &student, &user);
+             fclose(fptr);
+             puts("password changed succssfully"); 
+            }
+            break;
+        default :
+            puts("wrong answer");
+        }
+        puts("\t\t\t\t*******************************");
+        system("pause");
+        system("clear");
+        instructions();
+        enterChoice(&choice);
+    }
+    //to free the memory 
+    deleteAll(&student);
+    puts("\n\t\t\t\t*******************************\n\n\t\t\t\tGOODBYE,SEE YOU SOON <3\n\n\t\t\t\t*******************************");
     return 0;
 }
 //order is function of the name
