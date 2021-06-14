@@ -112,6 +112,19 @@ int main() {
                 query(record.ID, &student);
             }
             break;
+         case 4: 
+            //osama
+            //check that the Linked is not empty
+            if (linkedEmpty(&student)) {
+                puts("database already free, there's no students to delete");
+               
+            }
+            else {
+                printf("enter student ID you want to remove: ");
+                scanf("%ld", &record.ID);
+                deleteStudent(record.ID, &student);               
+            }
+            break;
         case 6:
             //afaf
             if (linkedEmpty(&student)) {
@@ -123,6 +136,21 @@ int main() {
             }
             break;
          }
+         case 7:
+            //osama
+            if (linkedEmpty(&student)) {
+                puts("database is empty, no students to update his data");
+            }
+            else {
+                printf("enter student ID to search and update: ");
+                scanf("%ld", &record.ID);
+                update(record.ID, &student);
+            }
+            break;
+         case 8:
+            //osama
+            printf("you saved %d student successfully\n", student.size);
+            break;
          case 10:
             //hegazy
             while ((getchar()) != '\n');
