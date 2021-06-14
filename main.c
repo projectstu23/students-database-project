@@ -88,3 +88,42 @@ void insert(Student* record, Linked* pl) {
     }
     pl->size++;
 }
+case 2:
+            //abdelrahman
+            printf("enter student ID: ");
+            scanf("%ld", &record.ID);
+            while (record.ID <= 0)
+            {
+                puts("wrong input, ID must be bigger than zero ");
+                printf("enter student ID: ");
+                scanf("%ld", &record.ID);
+            }
+                //to clean input buffer
+                while ((getchar()) != '\n');
+                printf("%s", "enter student name: ");
+                gets(record.name);
+                printf("%s", "enter student deprtemnt: ");
+                gets(record.department);
+                printf("enter student last year degree: ");
+                scanf("%f", &record.degree);
+                insert(&record, &student);
+                break;
+        case 3:
+            //kashs
+            //check that the Linked is not empty
+            if (linkedEmpty(&student)) {
+                puts("database already free, there's no students to delete");
+            }
+            else {
+                deleteAll(&student);
+                remove("students.dat");
+                if (student.top == NULL)
+                {
+                    puts("all students removed");
+                }
+                //to save the password user had change
+                fptr = fopen("students.dat", "wb");
+                    save(fptr, &student, &user);
+                    fclose(fptr);
+            }
+            break;
