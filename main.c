@@ -100,6 +100,7 @@ int main() {
                 
             }
             break;
+                 
                  case 2:
             //abdelrahman
             printf("enter student ID: ");
@@ -120,6 +121,7 @@ int main() {
                 scanf("%f", &record.degree);
                 insert(&record, &student);
                 break;
+                 
         case 3:
             //kashs
             //check that the Linked is not empty
