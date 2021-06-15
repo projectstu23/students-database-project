@@ -274,7 +274,16 @@ int linkedEmpty(Linked* pl)
 {
     return pl->top == NULL;
 }
-
+ //kashsh
+void deleteAll(Linked* pl) {
+    Node* pn = pl->top;
+    while (pl->top != NULL) {
+        pl->top = pl->top->next;
+        free(pn);
+        pn = pl->top;
+    }
+    pl->size = 0;
+}
  //afaf
  void display(Student* record) {
         printf("%-15ld%-25s%-25s%-25.2f\n", record->ID, record->name, record->department,record->degree);
