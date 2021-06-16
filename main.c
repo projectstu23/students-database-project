@@ -325,7 +325,7 @@ void update(const long int id, Linked* pl)
         pn = pn->next;
     }
     if (pn) {
-        printf("the student data is\nstudent ID: %d\nstudent name: %s\nstudent department: %s\nstudent degree: %0.2f\nenter student new data::", pn->data.ID, pn->data.name, pn->data.department,pn->data.degree);
+        printf("the student data is\nstudent ID: %ld\nstudent name: %s\nstudent department: %s\nstudent degree: %0.2f\nenter student new data::", pn->data.ID, pn->data.name, pn->data.department,pn->data.degree);
         printf("enter student new ID: ");
         scanf_s("%ld", &pn->data.ID);
         while ((getchar()) != '\n');//clear input buffer 
