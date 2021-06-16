@@ -41,6 +41,11 @@ void readFile(FILE* fptr, Linked* pl,Login *pUser, void (*fp)(Student* record, L
 void query(const long int  id, Linked* pl);
 void instructions(void);
 void enterChoice(int* ch);
+//nagy
+void getPassword(Login* userCheck);
+//hegazy
+int signIn(Login* userCheck, Login* user);
+int changePassword(Login* userCheck, Login* user);
 int main() {
     //nagy => files
     Student record;
@@ -55,19 +60,10 @@ int main() {
         readFile(fptr, &student,&user, insert);
         fclose(fptr);
     }
-    puts("\t\t\t\tWELCOME TO YOUR STUDENTS DATABASE");
-    puts("\ntip,the default userName is \"admin\", default password is \"admin\"\nLOGIN");
-    printf("%s", "username: ");
-    gets(userCheck.userName);
-    printf("%s", "password: ");
-    gets(userCheck.password);
-    //to check for password correctness
-    while ((strcmp(user.userName,userCheck.userName))!=0 || (strcmp(user.password,userCheck.password))!=0 ) {
-        puts("wrong user name or password,please try login again");
-        printf("%s", "username: ");
-        gets(userCheck.userName);
-        printf("%s", "password: ");
-        gets(userCheck.password);
+   puts("\t\t\t\tWELCOME TO YOUR STUDENTS DATABASE");
+    if ((signIn(&userCheck, &user)) >= 3) {
+        puts("\nyou failed to sign in");
+        return 0;
     }
     system("clear");
     instructions();
@@ -207,28 +203,20 @@ int main() {
             break;
          case 10:
             //hegazy
-            while ((getchar()) != '\n');
-            printf("%s", "enter current password: ");
-            gets(userCheck.password);
-            while (  (strcmp(userCheck.password, user.password)) != 0)
-            {
-                puts("wrong password, enter password again");
-                printf("%s", "password: ");
-                gets(userCheck.password);
-            } 
-            printf("%s", "enter new userName: ");
-            gets(user.userName);
-            printf("%s", "enter new password: ");
-            gets(user.password);
-            //to save the new password in the file
-            fptr = fopen("students.dat", "wb");
-            if (fptr == NULL) {
-                puts("can't change the password");
-            }
-            else{
-             save(fptr, &student, &user);
-             fclose(fptr);
-             puts("password changed succssfully"); 
+            if ((changePassword(&userCheck, &user)) >= 3) {
+                puts("\npassword can't be changed");
+           }
+            else {
+                //to save the new password in the file
+                fptr = fopen("students.dat", "wb");
+                if (fptr == NULL) {
+                    puts("\ncan't change the password");
+                }
+                else {
+                    save(fptr, &student, &user);
+                    fclose(fptr);
+                    puts("\npassword changed succssfully");
+                }
             }
             break;
         default :
@@ -417,5 +405,26 @@ void  traverseLinked(Linked* pl, void (*pf)(Student* record))
     {
         (*pf)(&pn->data);
         pn = pn->next;
+    }
+}
+void getPassword(Login* userCheck) {
+    char ch;
+    int i = 0;
+    while (1) {
+        ch = _getch();	//get key
+        if (ch == ENTER || ch == TAB) {
+            userCheck->password[i] = '\0';
+            break;
+        }
+        else if (ch == BKSP) {
+            if (i > 0) {
+                i--;
+                printf("\b \b");		//for backspace
+            }
+        }
+        else {
+            userCheck->password[i++] = ch;
+            printf("*");				//to replace password character with *
+        }
     }
 }
