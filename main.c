@@ -428,3 +428,43 @@ void getPassword(Login* userCheck) {
         }
     }
 }
+int signIn(Login* userCheck, Login* user)
+{
+    int times = 1;
+    puts("\ntip,the default userName is "admin", default password is "admin"\nLOGIN");
+    printf("%s", "username: ");
+    gets(userCheck->userName);
+    printf("%s", "password: ");
+    //gets(userCheck->password);
+    getPassword(userCheck);
+    //to check for password correctness
+    while (times < 3 && ( (strcmp(user->userName, userCheck->userName)) != 0 || (strcmp(user->password, userCheck->password)) != 0 )) {
+        puts("\nwrong user name or password,please try login again");
+        printf("%s", "username: ");
+        gets(userCheck->userName);
+        printf("%s", "password: ");
+        getPassword(userCheck);
+        times++;
+    }
+    return times;
+}
+int changePassword(Login* userCheck, Login* user) {
+    int times = 1;
+    while ((getchar()) != '\n');
+    printf("%s", "enter current password: ");
+    getPassword(userCheck);
+    while (times<3 && (strcmp(userCheck->password, user->password)) != 0)
+    {
+        puts("\nwrong password, enter password again");
+        printf("%s", "password: ");
+        getPassword(userCheck);
+        times++;
+    }
+    if(times<3){
+        printf("\n%s", "enter new userName: ");
+        gets(user->userName);
+        printf("\n%s", "enter new password: ");
+        getPassword(user);//to sign the password in user not USERCHECK 
+    }
+    return times;
+}
