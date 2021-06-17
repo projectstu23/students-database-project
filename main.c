@@ -241,6 +241,17 @@ void insert(Student* record, Linked* pl) {
     strcpy(pn->data.name, record->name);
     strcpy(pn->data.department, record->department);
     pn->data.degree = record->degree;
+     Node* temp = pl->top;
+    while (temp)
+    {
+        if (temp->data.ID == record->ID)
+        {
+            free(pn);
+            return 0;
+        }
+        temp = temp->next;
+    }
+    //if program reach this point the id doesn't exist
     Node* currentPtr = pl->top;
     Node* previousPtr = NULL;
     //to insert  node in order
